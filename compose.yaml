@@ -1,0 +1,24 @@
+services:
+  web:
+    image: nginx:latest 
+    container_name: docker-project-web 
+    ports:
+      - "8087:80"
+    networks:
+      - muskan-network
+
+  alpine:
+    image: alpine:latest 
+    container_name: docker-project-alpine 
+    command: ["sh", "-c", "echo 'Alpine container is running' && sleep 3600"]
+    volumes:
+      - project-data:/data
+    networks:
+      - muskan-network 
+
+networks:
+  muskan-network:
+    driver: bridge  
+
+volumes:
+  project-data:
